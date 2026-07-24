@@ -1,0 +1,159 @@
+# Attack configuration for TrustMark paper (2311.18297v1)
+# https://arxiv.org/abs/2311.18297
+#
+# Using three severity levels (low, medium, high) as described in Table 6
+
+attacks:
+  # Identity (baseline)
+  - name: none
+
+  # Geometric Transformations (used during training)
+  - name: flip
+    axis: x  # Random flip with 50% probability
+
+  - name: resize_crop
+    scale: [0.8, 1.0]
+    ratio: [0.75, 1.3333333]
+
+  # JPEG Compression - Low: 70, Medium: 50, High: 40
+  - name: jpeg
+    quality: 70
+  - name: jpeg
+    quality: 50
+  - name: jpeg
+    quality: 40
+
+  # Brightness - Low: [0.9-1.1], Medium: [0.75-1.25], High: [0.5-1.5]
+  - name: brightness
+    factor: [0.9, 1.1]
+  - name: brightness
+    factor: [0.75, 1.25]
+  - name: brightness
+    factor: [0.5, 1.5]
+
+  # Contrast - Low: [0.9-1.1], Medium: [0.75-1.25], High: [0.5-1.5]
+  - name: contrast
+    factor: [0.9, 1.1]
+  - name: contrast
+    factor: [0.75, 1.25]
+  - name: contrast
+    factor: [0.5, 1.5]
+
+  # Saturation - Low: [0.9-1.1], Medium: [0.75-1.25], High: [0.5-1.5]
+  - name: saturation
+    saturation: [0.9, 1.1]
+  - name: saturation
+    saturation: [0.75, 1.25]
+  - name: saturation
+    saturation: [0.5, 1.5]
+
+  # Hue - Low: 0.01, Medium: 0.02, High: 0.05
+  # Note: Using color_jiggle with only hue parameter
+  - name: color_jiggle
+    brightness: 0.0
+    contrast: 0.0
+    saturation: 0.0
+    hue: 0.01
+  - name: color_jiggle
+    brightness: 0.0
+    contrast: 0.0
+    saturation: 0.0
+    hue: 0.02
+  - name: color_jiggle
+    brightness: 0.0
+    contrast: 0.0
+    saturation: 0.0
+    hue: 0.05
+
+  # Color Jiggle (combined) - Low: (0.05, 0.05, 0.05, 0.01), Medium: (0.1, 0.1, 0.1, 0.02), High: (0.1, 0.1, 0.1, 0.05)
+  - name: color_jiggle
+    brightness: 0.05
+    contrast: 0.05
+    saturation: 0.05
+    hue: 0.01
+  - name: color_jiggle
+    brightness: 0.1
+    contrast: 0.1
+    saturation: 0.1
+    hue: 0.02
+  - name: color_jiggle
+    brightness: 0.1
+    contrast: 0.1
+    saturation: 0.1
+    hue: 0.05
+
+  # Gaussian Blur - Low: (3, [0.1-1.0]), Medium: (5, [0.1-1.5]), High: (7, [0.1-2.0])
+  - name: gaussian_blur
+    kernel_size: 3
+    sigma: [0.1, 1.0]
+  - name: gaussian_blur
+    kernel_size: 5
+    sigma: [0.1, 1.5]
+  - name: gaussian_blur
+    kernel_size: 7
+    sigma: [0.1, 2.0]
+
+  # Gaussian Noise - Low: 0.02, Medium: 0.04, High: 0.08 (scaled to [0-255])
+  - name: gaussian_noise
+    std: 5.1   # 0.02 * 255
+  - name: gaussian_noise
+    std: 10.2  # 0.04 * 255
+  - name: gaussian_noise
+    std: 20.4  # 0.08 * 255
+
+  # Median Blur - Low/Medium/High: kernel 3
+  # Note: Paper uses same kernel size across all severity levels
+  - name: median_filter
+    ksize: 3
+
+  # Box Blur - Low: 3, Medium: 5, High: 7
+  - name: box_blur
+    kernel_size: 3
+  - name: box_blur
+    kernel_size: 5
+  - name: box_blur
+    kernel_size: 7
+
+  # Motion Blur - Low: (3-5, 25), Medium: (3-7, 45), High: (3-9, 90)
+  # Note: Motion blur attack uses different parameters, approximating with kernel size
+  - name: motion_blur
+    kernel_size: 5   # Low (~3-5)
+  - name: motion_blur
+    kernel_size: 7   # Medium (~3-7)
+  - name: motion_blur
+    kernel_size: 9   # High (~3-9)
+
+  # Posterize - Low: 5 bits, Medium: 4 bits, High: 3 bits
+  - name: posterization
+    bits: 5
+  - name: posterization
+    bits: 4
+  - name: posterization
+    bits: 3
+
+  # RGB Shift - Low: 0.02, Medium: 0.05, High: 0.1
+  - name: rgb_shift
+    r_shift: 0.02
+    g_shift: 0.02
+    b_shift: 0.02
+  - name: rgb_shift
+    r_shift: 0.05
+    g_shift: 0.05
+    b_shift: 0.05
+  - name: rgb_shift
+    r_shift: 0.1
+    g_shift: 0.1
+    b_shift: 0.1
+
+  # Sharpness - Low: 0.5, Medium: 1.0, High: 2.5
+  - name: sharpening
+    sharpness: 0.5
+  - name: sharpening
+    sharpness: 1.0
+  - name: sharpening
+    sharpness: 2.5
+
+# Notes on attacks not covered by markbench:
+# - Grayscale: Not implemented as a standalone attack
+#   (could use saturation=0 but that's not exactly the same)
+# - Motion blur parameters (angle, sigma) differ from paper's specification

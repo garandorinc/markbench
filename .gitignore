@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+.env
+.DS_Store
+.idea/
+.vscode/
+.ipynb_checkpoints/
+*.pdf
+
+# Local datasets, weights, and run outputs. The leading slash keeps these
+# rules from matching the markbench/data package.
+/data/
+/results/
+/runs/
+/checkpoints/

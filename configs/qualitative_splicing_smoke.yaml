@@ -1,0 +1,29 @@
+attacks:
+  - name: none
+    variants:
+      - {}
+
+  - name: splicing_untargeted
+    variants:
+      - mask_mode: box
+        num_splices: 1
+      - mask_mode: box
+        num_splices: 3
+      - mask_mode: irregular
+        num_splices: 1
+      - mask_mode: irregular
+        num_splices: [2, 4]
+      - mask_mode: segmentation
+        num_splices: 1
+      - mask_mode: segmentation
+        num_splices: [2, 5]
+      - mask_mode: auto
+        num_splices: 1
+      - mask_mode: auto
+        num_splices: [3, 6]
+    donor_source: same_dataset_random
+
+  - name: splicing_targeted
+    variants:
+      - {}
+    donor_source: same_dataset_random

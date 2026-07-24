@@ -1,0 +1,12 @@
+attacks:
+  - name: jpeg
+    quality: 50
+
+  - name: rotation
+    angle: 15
+
+  - name: gaussian_noise
+    std: [5.0, 10.0]
+
+  - name: contrast
+    factor: 1.5

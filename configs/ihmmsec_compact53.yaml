@@ -1,0 +1,720 @@
+attacks:
+- name: affine
+  variants:
+  - rotation:
+    - -15
+    - 15
+    scale_x:
+    - 0.9
+    - 1.1
+    scale_y:
+    - 0.9
+    - 1.1
+    shear_x: 0.0
+    shear_y: 0.0
+    translate_x: 0.0
+    translate_y: 0.0
+  - rotation:
+    - -30
+    - 30
+    scale_x: 1.0
+    scale_y: 1.0
+    shear_x: 0.0
+    shear_y: 0.0
+    translate_x:
+    - -0.1
+    - 0.1
+    translate_y:
+    - -0.1
+    - 0.1
+  - rotation: 0.0
+    scale_x: 1.0
+    scale_y: 1.0
+    shear_x:
+    - -0.1
+    - 0.1
+    shear_y:
+    - -0.1
+    - 0.1
+    translate_x: 0.0
+    translate_y: 0.0
+  - rotation:
+    - -30
+    - 30
+    scale_x:
+    - 0.9
+    - 1.1
+    scale_y:
+    - 0.9
+    - 1.1
+    shear_x:
+    - -0.05
+    - 0.05
+    shear_y:
+    - -0.05
+    - 0.05
+    translate_x:
+    - -0.05
+    - 0.05
+    translate_y:
+    - -0.05
+    - 0.05
+  - rotation:
+    - -90
+    - 90
+    scale_x: 1.0
+    scale_y: 1.0
+    shear_x:
+    - -0.2
+    - 0.2
+    shear_y:
+    - -0.2
+    - 0.2
+    translate_x: 0.0
+    translate_y: 0.0
+  - rotation:
+    - -180
+    - 180
+    scale_x:
+    - 0.85
+    - 1.15
+    scale_y:
+    - 0.85
+    - 1.15
+    shear_x:
+    - -0.15
+    - 0.15
+    shear_y:
+    - -0.15
+    - 0.15
+    translate_x:
+    - -0.15
+    - 0.15
+    translate_y:
+    - -0.15
+    - 0.15
+  - rotation: 0.0
+    scale_x:
+    - 0.6
+    - 1.4
+    scale_y:
+    - 0.6
+    - 1.4
+    shear_x:
+    - -0.3
+    - 0.3
+    shear_y:
+    - -0.3
+    - 0.3
+    translate_x: 0.0
+    translate_y: 0.0
+  - rotation:
+    - -180
+    - 180
+    scale_x:
+    - 0.7
+    - 1.3
+    scale_y:
+    - 0.7
+    - 1.3
+    shear_x:
+    - -0.2
+    - 0.2
+    shear_y:
+    - -0.2
+    - 0.2
+    translate_x:
+    - -0.2
+    - 0.2
+    translate_y:
+    - -0.2
+    - 0.2
+- name: box_blur
+  variants:
+  - kernel_size: 3
+  - kernel_size: 5
+  - kernel_size: 7
+- name: brightness
+  variants:
+  - factor: 0.1
+  - factor: 0.25
+  - factor: 0.5
+  - factor:
+    - 0.5
+    - 1.5
+  - factor: 0.75
+  - factor:
+    - 0.7
+    - 1.3
+  - factor: 1.0
+  - factor: 1.25
+  - factor: 1.5
+  - factor: 1.75
+  - factor: 2.0
+- name: chain
+  variants:
+  - attacks:
+    - name: jpeg
+      quality: 40
+    - name: crop
+      width_ratio: 0.71
+      height_ratio: 0.71
+      random_location: true
+    - name: brightness
+      factor: 0.5
+  - attacks:
+    - name: jpeg
+      quality: 60
+    - name: crop
+      width_ratio: 0.71
+      height_ratio: 0.71
+      random_location: true
+    - name: brightness
+      factor: 0.5
+  - attacks:
+    - name: jpeg
+      quality: 80
+    - name: crop
+      width_ratio: 0.71
+      height_ratio: 0.71
+      random_location: true
+    - name: brightness
+      factor: 0.5
+- name: color_jiggle
+  variants:
+  - brightness: 0.0
+    contrast: 0.0
+    saturation: 0.0
+    hue:
+    - -0.1
+    - 0.1
+  - brightness: 0.0
+    contrast: 0.0
+    saturation: 0.0
+    hue: 0.1
+  - brightness: 0.0
+    contrast: 0.0
+    saturation: 0.0
+    hue: 0.2
+  - brightness: 0.0
+    contrast: 0.0
+    saturation: 0.0
+    hue: -0.1
+  - brightness: 0.0
+    contrast: 0.0
+    saturation: 0.0
+    hue: -0.2
+- name: color_jiggle_trustmark
+  variants:
+  - brightness: 0.05
+    contrast: 0.05
+    saturation: 0.05
+    hue: 0.01
+  - brightness: 0.1
+    contrast: 0.1
+    saturation: 0.1
+    hue: 0.02
+  - brightness: 0.1
+    contrast: 0.1
+    saturation: 0.1
+    hue: 0.05
+- name: color_quantization
+  variants:
+  - k: 256
+  - k: 128
+  - k: 64
+  - k: 32
+  - k: 16
+- name: contrast
+  variants:
+  - factor: 0.5
+  - factor:
+    - 0.5
+    - 1.5
+  - factor:
+    - 0.5
+    - 2.0
+  - factor: 0.75
+  - factor:
+    - 0.7
+    - 1.3
+  - factor: 1.0
+  - factor: 1.25
+  - factor: 1.5
+  - factor: 1.75
+  - factor: 2.0
+- name: convolutional_filter
+  variants:
+  - kernel:
+    - - 0
+      - -1
+      - 0
+    - - -1
+      - 5
+      - -1
+    - - 0
+      - -1
+      - 0
+    strength: 1.0
+- name: crop
+  variants:
+  - width_ratio: 0.32
+    height_ratio: 0.32
+    random_location: true
+  - width_ratio: 0.45
+    height_ratio: 0.45
+    random_location: true
+  - width_ratio: 0.55
+    height_ratio: 0.55
+    random_location: true
+  - width_ratio: 0.63
+    height_ratio: 0.63
+    random_location: true
+  - width_ratio: 0.71
+    height_ratio: 0.71
+    random_location: true
+  - width_ratio: 0.77
+    height_ratio: 0.77
+    random_location: true
+  - width_ratio: 0.84
+    height_ratio: 0.84
+    random_location: true
+  - width_ratio: 0.89
+    height_ratio: 0.89
+    random_location: true
+  - width_ratio: 0.95
+    height_ratio: 0.95
+    random_location: true
+- name: dct
+  variants:
+  - a: 1.0
+    power: 0.01
+    argmulti: 5.0
+    shuffle: false
+  - a: 1.0
+    power: 0.01
+    argmulti: 5.0
+    shuffle: true
+  - a: 5.0
+    power: 0.05
+    argmulti: 8.0
+    shuffle: false
+  - a: 5.0
+    power: 0.05
+    argmulti: 8.0
+    shuffle: true
+  - a: 10.0
+    power: 0.1
+    argmulti: 15.0
+    shuffle: false
+  - a: 10.0
+    power: 0.1
+    argmulti: 15.0
+    shuffle: true
+- name: diagonal_flip
+  variants:
+  - {}
+- name: dither_noise
+  variants:
+  - intensity: 0.02
+  - intensity: 0.08
+  - intensity: 0.12
+- name: dwt
+  variants:
+  - a: 1.0
+    power: 0.05
+    argmulti: 1.0
+    wavelet: haar
+  - a: 5.0
+    power: 0.1
+    argmulti: 2.0
+    wavelet: db4
+  - a: 15.0
+    power: 0.5
+    argmulti: 5.0
+    wavelet: db4
+- name: fft
+  variants:
+  - a: 1.0
+    power: 0.001
+    shuffle: false
+  - a: 1.0
+    power: 0.001
+    shuffle: true
+  - a: 5.0
+    power: 0.01
+    argmulti: 5.0
+    shuffle: false
+  - a: 5.0
+    power: 0.01
+    argmulti: 5.0
+    shuffle: true
+  - a: 15.0
+    power: 0.05
+    argmulti: 8.0
+    shuffle: false
+  - a: 15.0
+    power: 0.05
+    argmulti: 8.0
+    shuffle: true
+- name: flip
+  variants:
+  - axis: x
+  - axis: y
+- name: gamma_correction
+  variants:
+  - gamma: 0.5
+  - gamma: 0.8
+  - gamma: 1.6
+  - gamma: 2.5
+- name: gaussian_blur
+  variants:
+  - kernel_size: 3
+    sigma: 0.5
+  - kernel_size: 3
+    sigma:
+    - 0.1
+    - 1.0
+  - kernel_size: 3
+    sigma: 3.0
+  - kernel_size: 5
+    sigma: 1.0
+  - kernel_size: 5
+    sigma:
+    - 0.1
+    - 1.5
+  - kernel_size: 7
+    sigma:
+    - 0.1
+    - 2.0
+  - kernel_size: 9
+    sigma: 1.5
+  - kernel_size: 13
+    sigma: 2.0
+  - kernel_size: 17
+    sigma: 2.0
+  - kernel_size:
+    - 3
+    - 17
+    sigma:
+    - 0.1
+    - 2.0
+  - kernel_size: 3
+    sigma: 5.0
+- name: gaussian_noise
+  variants:
+  - std: 1.0
+  - std: 2.55
+  - std: 5.0
+  - std: 10.2
+  - std: 12.75
+  - std: 15.0
+  - std: 20.4
+  - std: 25.5
+- name: gif
+  variants:
+  - {}
+- name: grayscale
+  variants:
+  - {}
+- name: high_pass_filter
+  variants:
+  - {}
+- name: histogram_equalization
+  variants:
+  - {}
+- name: interpolation
+  variants:
+  - fx: 0.5
+    fy: 0.5
+    interpolation_mode: linear
+  - fx: 0.75
+    fy: 0.75
+    interpolation_mode: linear
+  - fx:
+    - 0.5
+    - 1.5
+    fy:
+    - 0.5
+    - 1.5
+    interpolation_mode: linear
+  - fx: 1.25
+    fy: 1.25
+    interpolation_mode: linear
+  - fx: 1.5
+    fy: 1.5
+    interpolation_mode: linear
+- name: invert_colors
+  variants:
+  - {}
+- name: jpeg
+  variants:
+  - quality: 40
+  - quality: 50
+  - quality: 60
+  - quality: 70
+  - quality: 80
+  - quality: 90
+  - quality: 95
+- name: jpeg2000
+  variants:
+  - compression_ratio: 35
+  - compression_ratio: 100
+- name: low_pass_filter
+  variants:
+  - kernel_size: 3
+  - kernel_size: 5
+  - kernel_size: 7
+- name: median_filter
+  variants:
+  - ksize: 3
+  - ksize: 5
+  - ksize: 7
+  - ksize:
+    - 3
+    - 7
+- name: motion_blur
+  variants:
+  - kernel_size: 5
+  - kernel_size: 7
+  - kernel_size: 9
+  - kernel_size: 3
+- name: none
+  variants:
+  - {}
+- name: perspective
+  variants:
+  - distortion_scale: 0.1
+  - distortion_scale:
+    - 0.1
+    - 0.3
+  - distortion_scale: 0.2
+  - distortion_scale: 0.3
+  - distortion_scale: 0.4
+  - distortion_scale: 0.5
+  - distortion_scale:
+    - 0.1
+    - 0.5
+  - distortion_scale: 0.6
+  - distortion_scale: 0.7
+  - distortion_scale: 0.8
+- name: poisson_noise
+  variants:
+  - scale: 1.0
+  - scale: 0.75
+  - scale: 1.25
+- name: posterization
+  variants:
+  - bits: 3
+  - bits: 4
+  - bits: 5
+  - bits: 6
+- name: quantization
+  variants:
+  - quantization_level: 8
+  - quantization_level: 16
+  - quantization_level: 32
+- name: region_blackout
+  variants:
+  - width: 64
+    height: 64
+    random_location: true
+    fill_value: 0.0
+  - width: 128
+    height: 128
+    random_location: true
+    fill_value: 0.0
+  - width: 256
+    height: 256
+    random_location: true
+    fill_value: 0.0
+- name: remove_lines
+  variants:
+  - remove_rows: 10
+    remove_cols: 10
+  - remove_rows: 30
+    remove_cols: 30
+  - remove_rows: 50
+    remove_cols: 50
+- name: resize_crop
+  variants:
+  - scale:
+    - 0.33
+    - 1.0
+    ratio:
+    - 0.75
+    - 1.3333333
+  - scale:
+    - 0.8
+    - 1.0
+    ratio:
+    - 0.75
+    - 1.3333333
+  - scale:
+    - 0.85
+    - 1.0
+    ratio:
+    - 0.85
+    - 1.15
+  - scale:
+    - 0.6
+    - 0.9
+    ratio:
+    - 0.75
+    - 1.3333333
+  - scale:
+    - 0.4
+    - 0.7
+    ratio:
+    - 0.6
+    - 1.6
+  - scale:
+    - 0.33
+    - 0.6
+    ratio:
+    - 0.5
+    - 2.0
+  - scale:
+    - 0.15
+    - 0.35
+    ratio:
+    - 0.4
+    - 2.5
+  - scale:
+    - 0.1
+    - 0.3
+    ratio:
+    - 0.3
+    - 3.0
+- name: rgb_shift_trustmark
+  variants:
+  - r_shift: 0.02
+    g_shift: 0.02
+    b_shift: 0.02
+  - r_shift: 0.05
+    g_shift: 0.05
+    b_shift: 0.05
+  - r_shift: 0.1
+    g_shift: 0.1
+    b_shift: 0.1
+- name: rotation
+  variants:
+  - angle:
+    - -90
+    - 90
+  - angle:
+    - -30
+    - 30
+  - angle:
+    - -10
+    - 10
+  - angle: 5
+  - angle: 10
+  - angle: 30
+  - angle: 45
+  - angle: 90
+  - angle: 60
+- name: salt_pepper
+  variants:
+  - amount: 0.05
+  - amount: 0.1
+- name: saturation
+  variants:
+  - saturation: 0.1
+  - saturation: 0.5
+  - saturation:
+    - 0.5
+    - 2.0
+  - saturation:
+    - 0.7
+    - 1.3
+  - saturation: 1.0
+  - saturation: 1.5
+- name: sharpening
+  variants:
+  - sharpness: 0.5
+  - sharpness: 1.0
+  - sharpness: 2.5
+- name: shearing
+  variants:
+  - shear_factor_x: 0.1
+    shear_factor_y: 0.1
+  - shear_factor_x: 0.2
+    shear_factor_y: 0.2
+  - shear_factor_x: 0.3
+    shear_factor_y: 0.3
+- name: small_distortions
+  variants:
+  - {}
+- name: speckle_noise
+  variants:
+  - std: 0.05
+  - std: 0.15
+- name: translation
+  variants:
+  - tx: 5
+    ty: 5
+  - tx: 10
+    ty: 10
+  - tx: 20
+    ty: 20
+- name: warping_grid
+  variants:
+  - {}
+- name: outpainting
+  mode: padding
+  pad_scale_range:
+  - 1.5
+  - 2.0
+  guidance_scale: 7.5
+  num_inference_steps: 25
+- name: inpainting_untargeted
+  variants:
+  - mode: inpaint
+    max_mask_side_ratio: 0.15
+  - mode: inpaint
+    max_mask_side_ratio: 0.35
+  - mode: inpaint
+    max_mask_side_ratio: 0.5
+  guidance_scale: 7.5
+  num_inference_steps: 25
+- name: inpainting_targeted
+  variants:
+  - mode: inpaint
+    max_mask_side_ratio: 0.15
+  - mode: inpaint
+    max_mask_side_ratio: 0.35
+  - mode: inpaint
+    max_mask_side_ratio: 0.5
+  target_mask_dilation_ratio: 0.03
+  guidance_scale: 7.5
+  num_inference_steps: 25
+- name: splicing_untargeted
+  variants:
+  - mask_mode: box
+    num_splices: 1
+  - mask_mode: box
+    num_splices: 3
+  - mask_mode: irregular
+    num_splices: 1
+  - mask_mode: irregular
+    num_splices:
+    - 2
+    - 4
+  - mask_mode: segmentation
+    num_splices: 1
+  - mask_mode: segmentation
+    num_splices:
+    - 2
+    - 5
+  - mask_mode: auto
+    num_splices: 1
+  - mask_mode: auto
+    num_splices:
+    - 3
+    - 6
+  donor_source: same_dataset_random
+- name: splicing_targeted
+  variants:
+  - {}
+  donor_source: same_dataset_random

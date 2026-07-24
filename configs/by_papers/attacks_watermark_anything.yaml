@@ -1,0 +1,60 @@
+# Attack configuration for Watermark Anything paper (2411.07231v2)
+# https://arxiv.org/abs/2411.07231
+#
+# Note: Using torchvision ColorJitter parameters which match the paper's augmentations
+
+attacks:
+  # Identity (baseline)
+  - name: none
+
+  # JPEG Compression - Random quality between 40 and 80
+  - name: jpeg
+    quality: [40, 80]
+
+  # Contrast adjustment - Factor 0.5 to 2.0
+  - name: contrast
+    factor: [0.5, 2.0]
+
+  # Saturation adjustment - Factor 0.5 to 2.0
+  - name: saturation
+    saturation: [0.5, 2.0]
+
+  # Hue adjustment - -0.1 to 0.1
+  - name: color_jiggle
+    brightness: 0.0
+    contrast: 0.0
+    saturation: 0.0
+    hue: [-0.1, 0.1]
+
+  # Gaussian Blur - Kernel size 3 to 17 (must be odd)
+  # Using median value of sigma range for consistency
+  - name: gaussian_blur
+    kernel_size: [3, 17]
+    sigma: [0.1, 2.0]
+
+  # Median Filter - Kernel size 3 to 7
+  - name: median_filter
+    ksize: [3, 7]
+
+  # Horizontal Flip
+  - name: flip
+    axis: x
+
+  # Random Resized Crop - Crop ratio 0.33 to 1.0
+  - name: resize_crop
+    scale: [0.33, 1.0]
+    ratio: [0.75, 1.3333333]
+
+  # Resize - Scale 0.5 to 1.5
+  - name: interpolation
+    fx: [0.5, 1.5]
+    fy: [0.5, 1.5]
+    interpolation_mode: linear
+
+  # Rotation - -10 to 10 degrees
+  - name: rotation
+    angle: [-10, 10]
+
+  # Perspective - Distortion scale 0.1 to 0.5
+  - name: perspective
+    distortion_scale: [0.1, 0.5]

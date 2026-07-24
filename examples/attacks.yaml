@@ -1,0 +1,17 @@
+# Example attack file for --attacks_config.
+#
+# An entry is either a string in the --attacks syntax, or a mapping with a
+# name and the attack parameters. An entry with a "variants" list is resolved
+# per image at run time: the runner selects one variant for each image from
+# the attack seed.
+attacks:
+  - none
+  - "jpeg:75"
+  - horizontal_flip
+  - name: gaussian_blur
+    variants:
+      - kernel_size: 3
+      - kernel_size: 5
+  - name: splicing_untargeted
+    variants:
+      - num_splices: 1

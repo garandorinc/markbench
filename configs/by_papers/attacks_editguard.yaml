@@ -1,0 +1,38 @@
+# Attack configuration for EditGuard paper (2312.08883v1)
+# https://arxiv.org/abs/2312.08883
+#
+# Note: EditGuard focuses on tamper localization rather than comprehensive robustness testing
+# The paper tests primarily against editing methods with limited degradation attacks
+
+attacks:
+  # Identity (baseline)
+  - name: none
+
+  # Gaussian Noise - Sigma values: 1, 5
+  - name: gaussian_noise
+    std: 1.0
+  - name: gaussian_noise
+    std: 5.0
+
+  # JPEG Compression - Quality: 70, 80, 90
+  - name: jpeg
+    quality: 70
+  - name: jpeg
+    quality: 80
+  - name: jpeg
+    quality: 90
+
+  # Poisson Noise
+  - name: poisson_noise
+    scale: 1.0
+
+# Notes on attacks and features not covered by markbench:
+# - WeChat Degradation: Real-world social media transmission pipeline
+# - Tampering/Editing Detection:
+#   - Splicing (copy-paste operations)
+#   - Object removal/inpainting
+#   - Diffusion-based edits (AIGC methods)
+#   - GAN-based manipulations (StarGAN, GANmutation, SinSwap)
+#
+# EditGuard primarily evaluates tamper localization accuracy under editing operations
+# rather than comprehensive robustness against geometric/signal processing attacks.

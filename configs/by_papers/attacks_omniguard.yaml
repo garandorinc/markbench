@@ -1,0 +1,54 @@
+# Attack configuration for OmniGuard paper (2412.01615v3)
+# https://arxiv.org/abs/2412.01615
+#
+# Using robustness evaluation parameters from Section 4.2 and Supplementary Material
+
+attacks:
+  # Identity (baseline)
+  - name: none
+
+  # JPEG Compression - Q = 50, 60, 70, 80, 90
+  - name: jpeg
+    quality: 50
+  - name: jpeg
+    quality: 60
+  - name: jpeg
+    quality: 70
+  - name: jpeg
+    quality: 80
+  - name: jpeg
+    quality: 90
+
+  # Brightness Adjustment - Factor range [0.5, 1.5]
+  - name: brightness
+    factor: [0.5, 1.5]
+
+  # Contrast Adjustment - Factor range [0.5, 1.5]
+  - name: contrast
+    factor: [0.5, 1.5]
+
+  # Hue Adjustment - Factor range [0, 1]
+  # Note: Using color_jiggle with only hue parameter
+  # Paper specifies [0, 1] which is a wider range than typical [-0.5, 0.5]
+  - name: color_jiggle
+    brightness: 0.0
+    contrast: 0.0
+    saturation: 0.0
+    hue: [0.0, 1.0]
+
+  # Gaussian Noise - Sigma = 15
+  - name: gaussian_noise
+    std: 15.0
+
+  # Salt-and-Pepper Noise
+  # Note: Paper mentions this attack but doesn't specify exact parameters
+  # Using reasonable default
+  - name: salt_pepper
+    amount: 0.05
+
+# Notes on attacks not covered by markbench:
+# - MagicQuill Editing: SOTA AIGC editing method (not a traditional attack)
+# - SDXL-Inpainting: Fine-grained editing method (sd_inpaint available but parameters differ)
+#
+# Paper uses SD Inpaint to apply attacks to randomly selected regions (100-400 pixels)
+# for training and testing robustness.

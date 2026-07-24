@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "markbench"
+version = "0.1.0"
+description = "A benchmark harness for the robustness of localized invisible image watermarks."
+readme = "README.md"
+license = { text = "CC-BY-NC-4.0" }
+authors = [
+    { name = "Garandor Limited" },
+]
+requires-python = ">=3.11"
+dependencies = [
+    "torch>=2.4.0",
+    "torchvision>=0.19.0",
+    "numpy>=1.24.0",
+    "Pillow>=9.0.0",
+    "opencv-python>=4.8.0",
+    "scipy>=1.10.0",
+    "PyWavelets>=1.5.0",
+    "kornia>=0.7.0",
+    "torchmetrics>=1.0.0",
+    "matplotlib>=3.7.0",
+    "tqdm>=4.65.0",
+    "pyyaml>=6.0",
+    "fire>=0.5.0",
+    "jaxtyping>=0.3.0",
+    "beartype>=0.18.0",
+    "python-dotenv>=1.0.0",
+    "pycocotools>=2.0.7",
+]
+
+[project.optional-dependencies]
+generative = [
+    "diffusers>=0.30.0",
+    "transformers>=4.40.0",
+    "accelerate>=0.30.0",
+    "safetensors>=0.4.0",
+]
+quality = [
+    "lpips>=0.1.4",
+]
+profile = [
+    "pyinstrument>=5.0.0",
+]
+dev = [
+    "pytest>=7.0",
+    "ruff>=0.5.0",
+]
+
+[project.scripts]
+markbench = "markbench.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["markbench*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
